@@ -3,15 +3,21 @@
 
 const axios = require('axios');
 const cheerio = require('cheerio')
+const sendEmail = require('./sendEmail.js')
 
 let url = 'https://www.amazon.com/dp/B081FZV45H/ref=fs_a_mb_3'
 
 axios.get(url)
   .then(function (response) {
     const html = response.data;
-    const $ = cheerio.load(html); 
+    const $ = cheerio.load(html);
     let price = $('#priceblock_ourprice').text()
     console.log(price)
+    if (price < '3, 000') {
+      sendEmail()
+    } else {
+      console.log('Macbook is over your target price')
+    }
 
   })
   .catch(function (error) {
@@ -19,7 +25,7 @@ axios.get(url)
     console.log(error);
   })
 
-  
+
 
 //trivial example that uses hardcoded html
 // const $ = cheerio.load('<p id="example">This is an <strong>example</strong> paragraph</p>')

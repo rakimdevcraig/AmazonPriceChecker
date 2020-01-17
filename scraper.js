@@ -4,6 +4,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio')
 const sendEmail = require('./sendEmail.js')
+var CronJob = require('cron').CronJob;
 
 let url = 'https://www.amazon.com/dp/B081FZV45H/ref=fs_a_mb_3'
 
